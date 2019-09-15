@@ -7,6 +7,8 @@ from __future__ import division, print_function, unicode_literals
 
 import sys
 import os
+import random
+import itertools
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
@@ -19,6 +21,7 @@ from cocos.layer import Layer
 from cocos.scene import Scene
 from cocos.sprite import Sprite
 
+from sprites import all_moves
 
 class SpriteLayer(Layer):
 
@@ -42,7 +45,10 @@ class SpriteLayer(Layer):
 
     def on_key_release(self, keys, mod):
         self.do_move(MoveTo((300, 150), 2))
-        self.do_move()
+        for i, Move in moves.items():
+            print(Move)
+            # self.do_move(Move(i))
+            Scene(Move(i))
 
         # if keys in (key.LEFT, key.RIGHT, key.ENTER):
         #     director.replace(get_sprite_test(self.index))
@@ -99,10 +105,24 @@ class DanceMoveLayer(SpriteLayer):
 
 # dance_scene = Scene(BackgroundLayer())
 
+def get_sprite_test(index):
+    d = moves[index]
+    return Scene(d(index))
+
+def gen_moves(order):
+    return {
+        i: move
+        for i, move in enumerate(order, start=1)
+    }
+
+def gen_order(n=4, m=4):
+    return list(itertools.chain(*[[random.choice(all_moves)]*m for _ in range(n)]))
+
+order = gen_order()
+moves = gen_moves(order=order)
 
 if __name__ == "__main__":
     director.init(800, 533, do_not_scale=True, caption="Cocos - Sprite demo")
     dancer = DanceMoveLayer()
     dance_scene = Scene(BackgroundLayer(), dancer)
     director.run(dance_scene)
-

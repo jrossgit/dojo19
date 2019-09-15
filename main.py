@@ -20,7 +20,6 @@ from cocos.scene import Scene
 from cocos.sprite import Sprite
 
 
-
 class FontLayer(Layer):
     def __init__(self, title="Sprite Exmaple #", subtitle="Goto()"):
         super(FontLayer, self).__init__()
@@ -77,144 +76,34 @@ class SpriteLayer(Layer):
 
         self.image = pyglet.resource.image("grossini.png")
         self.image.anchor_x = self.image.width // 2
-        self.image.anchor_y = self.image.height // 2
-
-        self.image_sister1 = pyglet.resource.image("grossinis_sister1.png")
-        self.image_sister1.anchor_x = self.image_sister1.width // 2
-        self.image_sister1.anchor_y = self.image_sister1.height // 2
-
-        self.image_sister2 = pyglet.resource.image("grossinis_sister2.png")
-        self.image_sister2.anchor_x = self.image_sister2.width // 2
-        self.image_sister2.anchor_y = self.image_sister2.height // 2
 
     def on_key_release(self, keys, mod):
-        # LEFT: go to previous scene
-        # RIGTH: go to next scene
-        # ENTER: restart scene
-        if keys == key.LEFT:
-            self.index -= 1
-            if self.index < 1:
-                self.index = len(tests)
-        elif keys == key.RIGHT:
-            self.index += 1
-            if self.index > len(tests):
-                self.index = 1
-
-    # def on_exit( self ):
-    #    for o in self.objects:
-    #        o.stop()
-
-
-
-
-class SpriteMoveTo(SpriteLayer):
-    def on_enter(self):
-        super(SpriteMoveTo, self).on_enter()
-
-
-class SpriteMoveBy(SpriteLayer):
-    def on_enter(self):
-        super(SpriteMoveBy, self).on_enter()
-
-
-class SpriteRepeatMoveBy(SpriteLayer):
-    def on_enter(self):
-        super(SpriteRepeatMoveBy, self).on_enter()
-
-
-
-class SpriteScale(SpriteLayer):
-    def on_enter(self):
         pass
 
 
-class SpriteRotate(SpriteLayer):
-    def on_enter(self):
-        pass
+class BackgroundLayer(Layer):
+
+    is_event_handler = True
+
+    def __init__(self):
+        super(BackgroundLayer, self).__init__()
+        self.batch = pyglet.graphics.Batch()
+        self.image = pyglet.resource.image("background.jpg")
+
+    def draw(self):
+        super(BackgroundLayer, self).draw()
+        self.batch.draw()
 
 
-class SpriteJump(SpriteLayer):
-    def on_enter(self):
-        pass
+class DanceMoveLayer:
+    pass
 
 
-class SpriteBezier(SpriteLayer):
-    def on_enter(self):
-        pass
-
-
-class SpriteSpawn(SpriteLayer):
-    def on_enter(self):
-        super(SpriteSpawn, self).on_enter()
-
-
-class SpriteSequence(SpriteLayer):
-    def on_enter(self):
-        super(SpriteSequence, self).on_enter()
-
-
-class SpriteDelay(SpriteLayer):
-    def on_enter(self):
-        super(SpriteDelay, self).on_enter()
-
-
-class SpriteBlink(SpriteLayer):
-    def on_enter(self):
-        super(SpriteBlink, self).on_enter()
-        sprite = Sprite(self.image)
-
-
-class SpriteFadeOut(SpriteLayer):
-    def on_enter(self):
-        super(SpriteFadeOut, self).on_enter()
-
-
-class SpriteRepeat(SpriteLayer):
-    def on_enter(self):
-        pass
-
-
-class SpriteRepeat2(SpriteLayer):
-    def on_enter(self):
-        super(SpriteRepeat2, self).on_enter()
-
-
-class SpriteRepeatSeq(SpriteLayer):
-    def on_enter(self):
-        super(SpriteRepeatSeq, self).on_enter()
-
-class SpriteRepeatSeq2(SpriteLayer):
-    def on_enter(self):
-        super(SpriteRepeatSeq2, self).on_enter()
-
-
-class SpriteTrigger(SpriteLayer):
-    def on_enter(self):
-        super(SpriteTrigger, self).on_enter()
-        sprite = Sprite(self.image)
-
-
-
-class SpriteReuseAction(SpriteLayer):
-    def on_enter(self):
-        super(SpriteReuseAction, self).on_enter()
-
-
-class SpriteReuseSequence(SpriteLayer):
-    def on_enter(self):
-        super(SpriteReuseSequence, self).on_enter()
-
-
-class SpriteAlterTime(SpriteLayer):
-    def on_enter(self):
-        super(SpriteAlterTime, self).on_enter()
-
-
-class SpriteRepeatAlterTime(SpriteLayer):
-    def on_enter(self):
-        super(SpriteRepeatAlterTime, self).on_enter()
-
+# dance_scene = Scene(BackgroundLayer())
 
 
 if __name__ == "__main__":
-    director.init(resizable=True, caption="Cocos - Sprite demo")
+    director.init(800, 600, do_not_scale=True, caption="Cocos - Sprite demo")
+    dance_scene = Scene(BackgroundLayer())
+
+    director.run(dance_scene)

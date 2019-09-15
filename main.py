@@ -20,67 +20,6 @@ from cocos.scene import Scene
 from cocos.sprite import Sprite
 
 
-class FontLayer(Layer):
-    def __init__(self, title="Sprite Exmaple #", subtitle="Goto()"):
-        super(FontLayer, self).__init__()
-
-        self.title = title
-        self.subtitle = subtitle
-
-        self.batch = pyglet.graphics.Batch()
-
-        self.text_title = pyglet.text.Label(
-            self.title,
-            font_size=32,
-            x=5,
-            y=director.get_window_size()[1],
-            anchor_x="left",
-            anchor_y="top",
-            batch=self.batch,
-        )
-
-        self.text_subtitle = pyglet.text.Label(
-            self.subtitle,
-            multiline=True,
-            width=600,
-            font_size=16,
-            x=5,
-            y=director.get_window_size()[1] - 80,
-            anchor_x="left",
-            anchor_y="top",
-            batch=self.batch,
-        )
-
-        self.text_help = pyglet.text.Label(
-            "Press LEFT / RIGHT for prev/next test, " "ENTER to restart test",
-            font_size=16,
-            x=director.get_window_size()[0] // 2,
-            y=20,
-            anchor_x="center",
-            anchor_y="center",
-            batch=self.batch,
-        )
-
-    def draw(self):
-        super(FontLayer, self).draw()
-        self.batch.draw()
-
-
-class SpriteLayer(Layer):
-
-    is_event_handler = True  #: enable pyglet's events
-
-    def __init__(self, index=1):
-        super(SpriteLayer, self).__init__()
-        self.index = index
-
-        self.image = pyglet.resource.image("grossini.png")
-        self.image.anchor_x = self.image.width // 2
-
-    def on_key_release(self, keys, mod):
-        pass
-
-
 class BackgroundLayer(Layer):
 
     is_event_handler = True
@@ -89,6 +28,10 @@ class BackgroundLayer(Layer):
         super(BackgroundLayer, self).__init__()
         self.batch = pyglet.graphics.Batch()
         self.image = pyglet.resource.image("background.jpg")
+        self.background_sprite = Sprite(self.image)
+        self.background_sprite.x = self.image.width // 2
+        self.background_sprite.y = self.image.height // 2
+        self.add(self.background_sprite)
 
     def draw(self):
         super(BackgroundLayer, self).draw()
@@ -103,7 +46,7 @@ class DanceMoveLayer:
 
 
 if __name__ == "__main__":
-    director.init(800, 600, do_not_scale=True, caption="Cocos - Sprite demo")
+    director.init(800, 533, do_not_scale=True, caption="Cocos - Sprite demo")
     dance_scene = Scene(BackgroundLayer())
 
     director.run(dance_scene)

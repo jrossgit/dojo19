@@ -12,13 +12,13 @@ from cocos.director import director
 from cocos.layer import Layer
 from cocos.scene import Scene
 from cocos.sprite import Sprite
-# from haiku import generate_haiku
+from haiku import generate_haiku
+
+from time import time
 
 def get_steps(index):
-    if isinstance(index, str):
-        index = ord(index[0])
-    index = index % 8
-    return Scene(FontLayer(title="SuperRandomStepper", subtitle=""), SpriteMoveTo(index))
+    
+    return Scene(FontLayer(title="", subtitle='\n'.join(generate_haiku())), SpriteMoveTo(index))
 
 class SpriteLayer(Layer):
 
@@ -29,8 +29,8 @@ class SpriteLayer(Layer):
         self.index = index
 
         self.image = pyglet.resource.image('flat-black-l.png')
-        self.image.anchor_x = self.image.width // 2
-        self.image.anchor_y = self.image.height // 2
+        self.image.anchor_x = self.image.width
+        self.image.anchor_y = self.image.height
 
     def on_key_release(self, keys, mod):
         # LEFT: go to previous scene
@@ -64,7 +64,7 @@ class SpriteMoveTo(SpriteLayer):
         self.add(sprite3)
         x, y = divmod(self.index, 3)
 
-        sprite3.position = x * 100, y * 100
+        sprite3.position = x * 100 +100 , y * 100 + 100
         # sprite3.do(MoveTo((620, 300), 1))
 
 

@@ -1,0 +1,24 @@
+# PyCon UK Dojo 2019
+
+The dojo starts at 19:30 on Sunday!
+
+What we'll be doing:
+
+* Breaking into teams
+* Hacking on a fun project
+* Finally, a show and tell
+* Accompanied by beer and pizza
+
+# Info
+
+Fork https://github.com/PyconUK/dojo19
+git clone your fork
+Later: Put code in team_<team_number>/
+       When finished, submit a PR
+
+https://github.com/los-cocos/cocos
+    Sprite code samples:
+    https://github.com/los-cocos/cocos/blob/master/samples/demo_sprites.py
+
+- https://pyglet.readthedocs.io
+- https://trinket.io/python/fcd2c5fff7

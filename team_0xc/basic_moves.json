@@ -1,0 +1,14 @@
+{
+    "name": "foo", 
+    "speed": 1000,
+    "moves": [ 
+        [
+            [{
+                "head": "CENTER",
+                "left_arm": "UP",
+                "right_arm": "UP"
+            }
+            ]
+        ]
+    ]
+}

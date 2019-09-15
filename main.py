@@ -42,7 +42,7 @@ class SpriteLayer(Layer):
 
     def on_key_release(self, keys, mod):
         self.do_move(MoveTo(300, 150))
-        self..do_move()
+        self.do_move()
 
         # if keys in (key.LEFT, key.RIGHT, key.ENTER):
         #     director.replace(get_sprite_test(self.index))

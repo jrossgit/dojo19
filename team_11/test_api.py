@@ -12,7 +12,7 @@ from __future__ import division, print_function, unicode_literals
 
 import sys
 import os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../images'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 from pyglet.gl import *
 from pyglet.window import key
@@ -22,6 +22,7 @@ from cocos.director import director
 from cocos.layer import Layer
 from cocos.scene import Scene
 from cocos.sprite import Sprite
+
 
 
 def get_sprite_test(index):
@@ -78,9 +79,6 @@ class SpriteLayer(Layer):
     def __init__(self, index=1):
         super(SpriteLayer, self).__init__()
         self.index = index
-
-        from os import getcwd
-        print (getcwd())
 
         self.image = pyglet.resource.image('flat-black-l.png')
         self.image.anchor_x = self.image.width // 2
@@ -456,8 +454,30 @@ class SpriteRepeatAlterTime(SpriteLayer):
 
 tests = {
     1: ("Test #1 - MoveTo", "sprite.do( MoveTo( (x,y), duration ) )", SpriteMoveTo),
+    2: ("Test #2 - MoveBy", "sprite.do( MoveBy( (delta_x,delta_y), duration ) )", SpriteMoveBy),
+    3: ("Test #3 - ScaleBy", "sprite.do( ScaleBy( zoom_factor, duration) )", SpriteScale),
+    4: ("Test #4 - RotateBy", "sprite.do( RotateBy( degrees, duration) )", SpriteRotate),
+    5: ("Test #5 - JumpBy", "sprite.do( JumpBy( (x,y), height, jumps, duration) )", SpriteJump),
+    6: ("Test #6 - Bezier", "sprite.do( Bezier( bezier_conf, duration) )", SpriteBezier),
+    7: ("Test #7 - Spawn", "Run 2 (or more) actions at the same time:\n\nsprite.do( JumpBy() | RotateBy() )\nor:\nsprite.do( Spawn( JumpBy(), RotateBy() ) )\nor:\nsprite.do( JumpBy() )\nsprite.do( RotateBy() )", SpriteSpawn),
+    8: ("Test #8 - Sequence", "Run actions sequentialy:\n\nsprite.do( Bezier() + MoveBy() + JumpBy() )", SpriteSequence),
+    9: ("Test #9 - Blink", "Show and hide an sprite\nsprite.do( Blink( times, duration ) )\n\nShow() and Hide() are actions too.", SpriteBlink),
+    10: ("Test #10 - FadeIn and FadeOut", "Fades in and out and sprite\nsprite1.do( FadeIn( duration ) )\nsprite2.do( FadeOut(duration)).", SpriteFadeOut),
+    11: ("Test #11 - Delay", "Delays between actions\nsprite.do(MoveBy() + Delay( seconds ) + JumpBy() )\n\nRandomDelay() is an action too.", SpriteDelay),
+    12: ("Test #12 - Repeat", "Run the same action in 'RestartMode'\nsprite.do( Repeat( Place( start_pos ) + JumpBy() ) )", SpriteRepeat),
+    13: ("Test #13 - Repeat a-la PingPong", "Run the same action in 'PingPongMode' \nsprite.do( Repeat( action + Reverse(action) )", SpriteRepeat2),
+    14: ("Test #14 - Repeat a Sequence", "Repeat a sequence 4 times\nsprite.do( ( place + jump + move + jump2)*4 )", SpriteRepeatSeq),
+    15: ("Test #15 - Repeat a Sequence #2", "Repeat a sequence of duplicate Actions\nsprite.do( Repeat( place + rot + move + rot + move + rot + move + rot ) )", SpriteRepeatMoveBy),
+    16: ("Test #16 - Repeat Sequence of Repeats", "Repeat a sequence of repeats\nsprite.do( Repeat( jump*3 + move*3 + jump2*3 )", SpriteRepeatSeq2),
+    17: ("Test #17 - Triggers", "Call a python function\nsprite.do( move + CallFunc( self.say_hello) )\n\nCallFuncS(), another action, passes the sprite as the 1st parameter", SpriteTrigger),
+    18: ("Test #18 - Reusable Actions", "Run the same action in different sprites\njump = JumpBy((400,0),150,4,4)\nsprite1.do( jump )\nsprite2.do( jump )", SpriteReuseAction),
+    19: ("Test #19 - Reusable Actions #2", "Run a sequence of actions in different sprites\nThe other sprites can run other actions in parallel.\nseq=Repeat(action1+action2+action3)\nsprite1.do(seq)\nsprite2.do(seq)\nsprite2.do( Repeat( rotate) )", SpriteReuseSequence),
+    20: ("Test #20 - Alter time", "You can change the speed of time:\n\nmove = Accelerate( MoveBy( (300,0), 5 )\nsprite.do(move)\n\nThe other sprite is doing the same action without altering the time", SpriteAlterTime),
+    21: ("Test #21 - Reverse time altered actions", "Reverse actions that were time-altered:\nmove = Accelerate( MoveBy( (300,0), 5 ))\nsprite.do(Repeat(move+Reverse(move)))\n\nThe other sprite is doing the same action without altering the time", SpriteRepeatAlterTime),
+
 }
 
 if __name__ == "__main__":
     director.init(resizable=True, caption='Cocos - Sprite demo')
-    director.run(get_sprite_test(1))
+#    director.window.set_fullscreen(True)
+director.run(get_sprite_test(1))

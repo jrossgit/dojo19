@@ -52,12 +52,16 @@ class HelloWorld(cocos.layer.ColorLayer):
         # being a CocosNode.
         people = [make_person(((110 * i) + 100, 100 + (50 * i))) for i in range(5)]
 
+        rot = RotateBy(90, duration=1)
+
         # add the sprite as a child, but with z=1 (default is z=0).
         # this means that the sprite will be drawn on top of the label
         for person in people:
             self.add(person['left_arm'], z=1)
             self.add(person['right_arm'], z=1)
             self.add(person['head'], z=1)
+
+            person['left_arm'].do(Repeat(rot + Reverse(rot)))
 
         # create a ScaleBy action that lasts 2 seconds
         # scale = ScaleBy(3, duration=2)

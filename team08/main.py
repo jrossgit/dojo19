@@ -4,9 +4,9 @@ import random
 import time
 import pygame
 
-
-# pygame.mixer.music.load("Oh My One Oh One.mp3")
-# pygame.mixer.music.play(-1)
+pygame.init()
+pygame.mixer.music.load("Oh My One Oh One.mp3")
+pygame.mixer.music.play(-1)
 
 
 screen = turtle.Screen()

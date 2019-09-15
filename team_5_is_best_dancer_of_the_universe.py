@@ -3,25 +3,39 @@ from itertools import chain
 from cocos.actions import Delay
 from cocos.actions import MoveBy
 from cocos.actions import Repeat
-from cocos.actions import RotateBy
 from cocos.director import director
 from cocos.layer import Layer
 from cocos.scene import Scene
 from cocos.sprite import Sprite
 
+
 def left(speed: float):
-    return ((MoveBy((100, 0), speed), Delay(speed)), (Delay(speed), MoveBy((100, 0), speed)))
+    return (
+        (MoveBy((100, 0), speed), Delay(speed)),
+        (Delay(speed), MoveBy((100, 0), speed)),
+    )
 
 
 def right(speed: float):
-    return ((Delay(speed), MoveBy((-100, 0), speed)),
-     (MoveBy((-100, 0), speed), Delay(speed)))
+    return (
+        (Delay(speed), MoveBy((-100, 0), speed)),
+        (MoveBy((-100, 0), speed), Delay(speed)),
+    )
+
 
 def front(speed: float):
-    return ((Delay(speed), MoveBy((0, 100), speed)), (MoveBy((0, 100), speed), Delay(speed)))
+    return (
+        (Delay(speed), MoveBy((0, 100), speed)),
+        (MoveBy((0, 100), speed), Delay(speed)),
+    )
+
 
 def back(speed: float):
-    return ((Delay(speed), MoveBy((0, -100), speed)), (MoveBy((0, -100), speed), Delay(speed)))
+    return (
+        (Delay(speed), MoveBy((0, -100), speed)),
+        (MoveBy((0, -100), speed), Delay(speed)),
+    )
+
 
 class LetsDance(Layer):
     def __init__(self, sequence, bpm):

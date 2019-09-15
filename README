@@ -15,6 +15,8 @@ Fork https://github.com/PyconUK/dojo19
 git clone your fork
 Later: Put code in team_<team_number>/
        When finished, submit a PR
-https://github.com/los-cocos/cocos (samples/demo_sprites.py)
+https://github.com/los-cocos/cocos
+    (samples/demo_sprites.py)
+    https://github.com/los-cocos/cocos/blob/master/samples/demo_sprites.py
 https://pyglet.readthedocs.io
 https://trinket.io/python/fcd2c5fff7
